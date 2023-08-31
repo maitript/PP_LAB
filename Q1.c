@@ -27,10 +27,10 @@ int main(int argc,char *argv[])
 	printf("between %lf and %lf is %lf\n",a,b,g_area);
 }
 
-// inline static double f(double x)
-// {
-// 	return x*x;
-// }
+inline static double f(double x)
+{
+	return x*x;
+}
 
 void calcArea(double a,double b,int n,double *g_area)
 {
