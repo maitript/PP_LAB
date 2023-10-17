@@ -1,19 +1,16 @@
 #include<omp.h>
 #include<stdio.h>
 long long fib[1000000];
-long long fibo(long long n)  //recursive function
+long long fibo(long long n)
 {
     long long i=0,j=0;
-    if(n==1||n==0)  //base case
+    if(n==1||n==0)
     {
         fib[n]=n;
         return n;
     }
-  
     if(n<0)return 0;
-
-   //creates tasks that run concurrently and i,j are shared among the tasks  
-    #pragma omp task shared(i)  
+    #pragma omp task shared(i)
     i=fibo(n-1);
     #pragma omp task shared(j)
     j=fibo(n-2);
