@@ -12,3 +12,8 @@ int main(int argc,char* argv[])
 
 	printf("Sum=%f",4*sum);
 }
+
+
+
+//TO COMPILE --> gcc -fopenmp -lm file.c
+//TO RUN ----> ./a.out 4 1000
