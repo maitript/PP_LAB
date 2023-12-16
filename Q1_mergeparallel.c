@@ -2,23 +2,33 @@
 #include<omp.h>
 #include<stdlib.h>
 
-void merge(int a[],int l,int mid,int h){
-    int n1 = mid-l+1;
-    int n2 = h-mid;
-    int arr1[n1],arr2[n2];
-    for(int i=0;i<n1;i++) arr1[i] = a[l+i];
-    for(int i=0;i<n2;i++) arr2[i] = a[mid+1+i];
-    int i=0,j=0,k=l;
-
-    while(i<n1 && j<n2){
-        if(arr1[i]<=arr2[j])
-            a[k++] = arr1[i++];
-        else
-            a[k++] = arr2[j++];
+void merge(int arr[], int l, int m, int r)
+    {
+         // Your code here
+         int i = l;
+         int k = l;
+         int j =m +1;
+         int temp[r+1];
+         while(i<=m && j<=r)
+         {
+             if(arr[i] < arr[j])
+             {
+                 temp[k++] = arr[i++];
+             } else {
+                 temp[k++] = arr[j++];
+             }
+         }
+         
+         while(i<=m)
+            temp[k++] = arr[i++];
+        
+        while(j<=r)
+            temp[k++] = arr[j++];
+            
+        for(int i=l;i<=r;i++)
+            arr[i] = temp[i];
+            
     }
-    while(i<n1) a[k++] = arr1[i++];
-    while(j<n2)a[k++] = arr2[j++];
-}
 
 void mergesortParallel(int a[],int l,int h){
     if(l<h){

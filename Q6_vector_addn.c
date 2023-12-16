@@ -1,3 +1,5 @@
+// refer github for the code, youve made modifications 
+
 #include<stdio.h>
 #include<omp.h>
 #include<stdlib.h>
@@ -23,7 +25,7 @@ void vector_addn(int n,int *res,int * a,int *b)
 
 void main(){
 	int *a,*b,*res;
-	int n = 1000;
+	int n = 10;
 	a = malloc(sizeof(int)*n);
 	b = malloc(sizeof(int)*n);
 	res = malloc(sizeof(int)*n);
@@ -33,6 +35,18 @@ void main(){
 		a[i] = rand()%10;
 		b[i] = rand()%10;
 	}
+
+	for (int i=0;i<n;i++)
+	{
+		printf("%d", a[i]);
+	}
+
+	printf("\n");
+	for (int i=0;i<n;i++)
+	{
+		printf("%d", b[i]);
+	}
+	printf("\n");
 
 	vector_addn(n,res,a,b);
 	printf("%d\n",ops);
