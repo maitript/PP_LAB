@@ -1,5 +1,3 @@
-// refer github for the code, youve made modifications 
-
 #include<stdio.h>
 #include<omp.h>
 #include<stdlib.h>
@@ -9,82 +7,29 @@ int ops = 0;
 void vector_addn(int n,int *res,int * a,int *b)
 {
 	#pragma omp parallel for
-
 	for(int i=0;i<n;i++)
 	{
 		res[i] = a[i]+b[i];
 		#pragma omp critical
-		{
-			ops+=1;
-		}
+		{ops+=1;}
 	}
-			
-	
-	
 }
 
 void main(){
-	int *a,*b,*res;
-	int n = 10;
-	a = malloc(sizeof(int)*n);
-	b = malloc(sizeof(int)*n);
-	res = malloc(sizeof(int)*n);
+	int n;
+    printf("Enter n value");
+    scanf("%d",&n);	
+	int a[n],b[n],c[n];
 
 	for (int i=0;i<n;i++)
 	{
-		a[i] = rand()%10;
-		b[i] = rand()%10;
+		a[i] = rand()%100;
+		b[i] = rand()%100;
 	}
 
-	for (int i=0;i<n;i++)
-	{
-		printf("%d", a[i]);
-	}
-
-	printf("\n");
-	for (int i=0;i<n;i++)
-	{
-		printf("%d", b[i]);
-	}
-	printf("\n");
-
-	vector_addn(n,res,a,b);
+	vector_addn(n,c,a,b);
+	for (int i = 0; i < n; i++)
+		printf("%d + %d = %d\n",a[i],b[i],c[i]);
+	
 	printf("%d\n",ops);
 }
-
-
-
-
-//-------------------OR----------------------------
-
-
-
-
-
-
-// #include<stdio.h>
-// #include<stdlib.h>
-// #include<omp.h>
-
-// void vector_addn_parallel(int n,int *res_vector,int *vector_a, int *vector_b){
-//     #pragma omp parallel for	
-// 	for(int i=0; i<n;i++)
-// 	{
-// 		res_vector[i] = vector_a[i]+vector_b[i];
-// 	}
-// }
-
-
-// void main(){
-//     int n = 100000;
-// 	int vector_a[100000],vector_b[100000], res_vector[100000];
-// 	for(int i=0;i<n;i++)
-// 	{
-// 		vector_a[i] = rand()%10;
-// 		vector_b[i] = rand()%10;	
-// 	}
-//     double start = omp_get_wtime();
-// 	vector_addn_parallel(n,res_vector,vector_a,vector_b);
-//     double end = omp_get_wtime();
-//     printf("Parallel Time %f\n",end-start);
-// }
